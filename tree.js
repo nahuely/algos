@@ -79,6 +79,17 @@ class Tree {
       }
     }
   }
+
+  count(node) {
+    let x, y;
+    if (node !== null) {
+      x = this.count(node.left);
+      y = this.count(node.right);
+
+      return x + y + 1;
+    }
+    return 0;
+  }
 }
 
 module.exports = { Node, Tree };

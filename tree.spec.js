@@ -85,4 +85,16 @@ describe("tree", () => {
 
     expect(output).toEqual(["A", "B", "C", "D", "E", "F", "G"]);
   });
+
+  test("count nodes of tree", () => {
+    const tree = new Tree(new Node("A"));
+    tree.root.left = new Node("B");
+    tree.root.right = new Node("C");
+    tree.root.left.left = new Node("D");
+    tree.root.left.right = new Node("E");
+    tree.root.right.left = new Node("F");
+    tree.root.right.right = new Node("G");
+
+    expect(tree.count(tree.root)).toEqual(7);
+  });
 });
