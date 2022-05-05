@@ -2,22 +2,15 @@ class Heap {
   #heap = [];
 
   constructor(list) {
-    this.#heap = this.#heap.concat(list);
+    this.#heap = list;
     this.heapify();
   }
 
   heapify() {
     for (let x = this.#heap.length - 1; x >= 0; x--) {
       let parent = x;
-      let leftChild;
-      let rightChild;
-      if (parent === 0) {
-        leftChild = 1;
-        rightChild = 2;
-      } else {
-        leftChild = parent * 2 + 1;
-        rightChild = parent * 2 + 2;
-      }
+      let leftChild = parent * 2 + 1;
+      let rightChild = parent * 2 + 2;
 
       let child =
         (this.#heap[leftChild] || 0) > (this.#heap[rightChild] || 0)
@@ -44,6 +37,10 @@ class Heap {
   add(e) {
     this.#heap.push(e);
     this.#adjust();
+  }
+
+  print() {
+    console.log(this.#heap);
   }
 
   #adjust() {
@@ -99,6 +96,7 @@ class Heap {
       let tmp = this.#heap[parent];
       this.#heap[parent] = this.#heap[child];
       this.#heap[child] = tmp;
+
       parent = child;
       leftChild = child * 2 + 1;
       rightChild = child * 2 + 2;
@@ -110,4 +108,4 @@ class Heap {
   }
 }
 
-const heap = new Heap([1, 2, 3, 4, 5]);
+module.exports = Heap;
