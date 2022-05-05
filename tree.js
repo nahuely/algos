@@ -105,6 +105,16 @@ class Tree {
     }
     return 0;
   }
+
+  countValues(node) {
+    let x, y;
+    if (node !== null) {
+      x = this.countValues(node.left);
+      y = this.countValues(node.right);
+      return x + y + node.data;
+    }
+    return 0;
+  }
 }
 
 module.exports = { Node, Tree };
