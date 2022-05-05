@@ -97,4 +97,16 @@ describe("tree", () => {
 
     expect(tree.count(tree.root)).toEqual(7);
   });
+
+  test("count nodes that have 2 childrens", () => {
+    const tree = new Tree(new Node("A"));
+    tree.root.left = new Node("B");
+    tree.root.right = new Node("C");
+    tree.root.left.left = new Node("D");
+    tree.root.left.right = new Node("E");
+    tree.root.right.left = new Node("F");
+    tree.root.right.right = new Node("G");
+
+    expect(tree.countBinaryNodes(tree.root)).toEqual(3);
+  });
 });

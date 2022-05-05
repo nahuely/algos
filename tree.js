@@ -90,6 +90,21 @@ class Tree {
     }
     return 0;
   }
+
+  countBinaryNodes(node) {
+    let x, y;
+    if (node !== null) {
+      x = this.countBinaryNodes(node.left);
+      y = this.countBinaryNodes(node.right);
+
+      if (node.left && node.right) {
+        return x + y + 1;
+      } else {
+        return x + y;
+      }
+    }
+    return 0;
+  }
 }
 
 module.exports = { Node, Tree };
