@@ -56,6 +56,35 @@ describe("BST", () => {
     bst.insert(bst.root, 35);
     bst.insert(bst.root, 45);
 
-    bst.delete(45);
+    bst.delete(bst.root, 90);
+    expect(bst.search(90)).toBeNull();
+    expect(bst.search(45)).not.toBeNull();
+  });
+
+  test("isleaf", () => {
+    const bst = new BST(30);
+    bst.insert(bst.root, 50);
+    expect(bst.isLeaf(bst.root.right)).toBe(true);
+  });
+
+  test("inPost", () => {
+    const bst = new BST(30);
+    bst.insert(bst.root, 50);
+    bst.insert(bst.root, 20);
+    bst.insert(bst.root, 25);
+
+    expect(bst.inPost(bst.root.left)).toHaveProperty("data", 25);
+  });
+
+  test("inSuccessor", () => {
+    const bst = new BST(30);
+    bst.insert(bst.root, 20);
+    bst.insert(bst.root, 90);
+    bst.insert(bst.root, 10);
+    bst.insert(bst.root, 25);
+    bst.insert(bst.root, 35);
+    bst.insert(bst.root, 45);
+
+    expect(bst.inSuccessor(bst.root.right)).toHaveProperty("data", 35);
   });
 });

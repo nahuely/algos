@@ -26,7 +26,7 @@ class BST {
       } else {
         current = current.right;
       }
-    } while (current !== null);
+    } while (current);
 
     return null;
   }
@@ -57,6 +57,22 @@ class BST {
     return node.left === null && node.right === null;
   }
 
+  inPost(node) {
+    let curr = node;
+    while (curr && curr.right) {
+      curr = curr.right;
+    }
+    return curr;
+  }
+
+  inSuccessor(node) {
+    let curr = node;
+    while (curr && curr.left) {
+      curr = curr.left;
+    }
+    return curr;
+  }
+
   height(node) {
     if (node !== null) {
       let left, right;
@@ -69,28 +85,33 @@ class BST {
     return 0;
   }
 
-  delete(x) {
-    let parent = this.#root;
-    let current = parent;
+  delete(node, value) {
+    if (!node) {
+      return null;
+    }
 
-    while (current !== null) {
-      if (current.data === x) {
-        if (this.isLeaf(current)) {
-          if (parent.left === current) {
-            parent.left = null;
-          }
-          if (parent.right === current) {
-            parent.right = null;
-          }
-        }
+    if (this.isLeaf(node) && node.data) {
+      if (node === this.root) {
+        this.#root = null;
+        return null;
       }
+      node = null;
+      return null;
+    }
 
-      parent = current;
-
-      if (x < current.data) {
-        current = current.left;
+    if (value < node.data) {
+      node.left = this.delete(node.left, value);
+    } else if (value > node.right) {
+      node.right = this.delete(node.right, value);
+    } else {
+      if (this.height(node.left) > this.height(node.right)) {
+        const q = this.inPost(node.left);
+        node.data = q.data;
+        node.left = this.delete(node.left, q.data);
       } else {
-        current = current.right;
+        const q = this.inSuccessor(node.right);
+        node.data = q.data;
+        node.right = this.delete(node.right, q.data);
       }
     }
   }

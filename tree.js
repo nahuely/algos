@@ -13,6 +13,10 @@ class Node {
     return this.#data;
   }
 
+  set data(x) {
+    this.#data = x;
+  }
+
   get left() {
     return this.#left;
   }
